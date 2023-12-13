@@ -39,13 +39,18 @@ router.post("/register-course", async (req, res) => {
     }
   });
 //endpoint to change the course
-router.get("/get-course",async(req,res)=>{
+router.get("/get-course/:standard",async(req,res)=>{
+  console.log(req.params.standard)
     try {
-
-   const course = await Course.find();
-   res.status(200).send({courses: course})
-
-        
+   
+   const course = await Course.find({standard: req.params.standard})
+   if(course.length>0){
+    res.status(200).send({courses: course})
+   }
+   else{
+    res.status(200).send("Data not found")
+   }
+   
     } catch (error) {
         res.status(500).send({error: error.message})
     }
