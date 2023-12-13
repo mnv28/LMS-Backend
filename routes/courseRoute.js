@@ -51,7 +51,7 @@ router.get("/get-course/:standard",async(req,res)=>{
     }
 });
 //endpoint to get the course
-router.get("/get-course/:id",async(req,res)=>{
+router.get("/courseDetails/:id",async(req,res)=>{
   try {
 
  const course = await Course.findOne({_id: req.params.id})
