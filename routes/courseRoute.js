@@ -44,12 +44,7 @@ router.get("/get-course/:standard",async(req,res)=>{
     try {
    
    const course = await Course.find({standard: req.params.standard})
-   if(course.length>0){
-    res.status(200).send({courses: course})
-   }
-   else{
-    res.status(200).send("Data not found")
-   }
+   res.status(200).send({courses: course})
    
     } catch (error) {
         res.status(500).send({error: error.message})
