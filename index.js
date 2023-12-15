@@ -22,7 +22,7 @@ app.use('/api/course',require('./routes/courseRoute'))
 app.use('/api/enquiry',require('./routes/enquiryRoute'))
 
 app.use("/api/user", require('./routes/Auth'));
-app.use("/api",require("./routes/paymentRoute"))
+app.use("/api/payment",require("./routes/paymentRoute"))
 
 app.listen(process.env.PORT,()=>{
    console.log("Server is connected with",process.env.PORT)

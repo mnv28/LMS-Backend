@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Course = require('../model/course')
+const Pdf = require("../model/pdf")
 const dotenv = require("dotenv");
 dotenv.config();
 const cloudinary = require("cloudinary").v2;
@@ -164,5 +165,36 @@ router.post("/change-course-title/:id",async(req,res)=>{
       res.status(500).send({success: false, error: error.message })
     }
   });
+
+  
+  router.post("/register-pdf", async (req, res) => {
+    try {
+       if (!req?.files?.pdf) return res.status(400).send('Please upload an pdf');
+     const file = req.files.pdf;
+    const result = await cloudinary.uploader.upload(file.tempFilePath, { folder: 'pdfs' });
+
+      if(result){
+        const pdf = await Pdf.create({
+          pdf_name: file.name,
+          pdf_url: result.secure_url,
+          pdf_asset_id: result.asset_id,
+          standard: req.body.standard
+         })
+         res.status(200).json({ pdfDetails: pdf });
+      }else{
+        res.status(500).json('Failed to upload PDF to Cloudinary');
+      }
+
+      // if (result) {
+     
+      //    res.status(200).send({success: true,data: course});
+      // }
+
+    } catch (error) {
+      res.status(404).send(error.message);
+    }
+  });
+
+
   
   module.exports = router;
