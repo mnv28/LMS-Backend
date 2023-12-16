@@ -6,7 +6,10 @@ const cors = require('cors');
 
 app.use(express.json());
 app.use(cors());
-
+const bodyParser = require('body-parser');
+// Parse JSON and URL-encoded form data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 const connectToMongo = require('./utils/db');
 
@@ -22,7 +25,7 @@ app.use('/api/course',require('./routes/courseRoute'))
 app.use('/api/enquiry',require('./routes/enquiryRoute'))
 
 app.use("/api/user", require('./routes/Auth'));
-app.use("/api/payment",require("./routes/paymentRoute"))
+app.use("/api",require("./routes/paymentRoute"))
 
 app.listen(process.env.PORT,()=>{
    console.log("Server is connected with",process.env.PORT)
