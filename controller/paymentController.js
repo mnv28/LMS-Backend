@@ -46,7 +46,7 @@ const paymentCallBack = async(req,res)=>{
 
         if (generated_signature == razorpay_signature) {
             console.log('payment successfull') 
-            return res.redirect('http://localhost:3000/payment/success')
+            return res.redirect('https://lms-client-zeta.vercel.app/success')
         }
     } catch (error) {
         console.log(error.message);
@@ -56,7 +56,7 @@ const paymentCallBack = async(req,res)=>{
 
 const paymentCancel = async(req,res)=>{
     try {
-        return res.redirect('http://localhost:3000/failure')
+        return res.redirect('https://lms-client-zeta.vercel.app/failure')
     } catch (error) {
         console.log(error.message);
     }
