@@ -180,6 +180,21 @@ router.post("/change-course-title/:id",async(req,res)=>{
   });
 
   
+//delete course
+router.delete("/delete-course/:id",async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const user = await Course.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(400).json("Course not found");
+    }
+    res.status(200).send("Course deleted successfully");
+  
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+});
+
   router.post("/register-pdf", async (req, res) => {
     try {
        if (!req?.files?.pdf) return res.status(400).send('Please upload an pdf');
