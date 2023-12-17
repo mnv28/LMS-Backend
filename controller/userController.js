@@ -40,7 +40,20 @@ const signUpUser = async (req, res) => {
     res.status(400).send( error.message);
   }
 };
+
+const studentList =async(req,res)=>{
+  try {
+    const user = await userModel.find().select("-password")
+    res.status(200).send({users: user})
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+
 module.exports = {
   loginUser,
-  signUpUser
+  signUpUser,
+  studentList
 };

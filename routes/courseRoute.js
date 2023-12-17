@@ -51,6 +51,19 @@ router.get("/get-course/:standard",async(req,res)=>{
         res.status(500).send({error: error.message})
     }
 });
+router.get("/get-course",async(req,res)=>{
+  console.log(req.params.standard)
+    try {
+   
+   const course = await Course.find()
+   res.status(200).send({courses: course})
+   
+    } catch (error) {
+        res.status(500).send({error: error.message})
+    }
+});
+
+
 //endpoint to get the course
 router.get("/courseDetails/:id",async(req,res)=>{
   try {

@@ -33,9 +33,9 @@ router.post("/enquiry-user", async (req, res) => {
 router.get("/get-enquiry",async(req,res)=>{
     try {
     const enquiry = await Enquiry.find();
-    res.status(200).send({success: true,enquiries: enquiry})
+    res.status(200).send({enquiries: enquiry})
     } catch (error) {
-        res.status(500).send({success: false, message: error.message})
+        res.status(500).send(error.message)
     }
 })
 
