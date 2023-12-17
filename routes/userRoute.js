@@ -144,15 +144,7 @@ router.get('/getuser/:id',  async (req, res) => {
     }
   });
 
-  router.get('/students',  async (req, res) => {
-    try {
-      const user = await User.find().select("-password")
-      res.status(200).send({users: user})
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Internal Server Error");
-    }
-  })
+ 
 
 
 module.exports = router;

@@ -51,9 +51,25 @@ const studentList =async(req,res)=>{
   }
 }
 
+const deleteUser=async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const user = await userModel.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(400).json("User not found");
+    }
+    res.status(200).json("User deleted successfully");
+  
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+
+
 
 module.exports = {
   loginUser,
   signUpUser,
-  studentList
+  studentList,
+  deleteUser
 };
